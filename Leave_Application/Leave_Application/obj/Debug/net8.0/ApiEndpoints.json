@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "Leave_Application.Controllers.LeaveController",
+    "Method": "ApplyForLeave",
+    "RelativePath": "apply",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Leave_Application.Models.ApplyLeaveDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Leave_Application.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",
