@@ -1,12 +1,48 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Leave_Application.Data;
+using Leave_Application.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Leave_Application.Controllers
 {
     public class LeaveController : Controller
     {
-        public IActionResult Index()
+
+        private readonly AppDbContext _context;
+       
+        public LeaveController(AppDbContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        [HttpPost("apply")]
+        public async Task<IActionResult> ApplyForLeave([FromBody] ApplyLeaveDto request)
+        {
+            
+            // var employeeExists = await _context.Employees.AnyAsync(e => e.EmployeeId == request.EmployeeId);
+           // if (!employeeExists)
+                return NotFound($"Employee with ID {request.EmployeeId} not found.");
+
+            var days = (request.EndDate - request.StartDate).Days + 1;
+
+            var leave = new LeaveTable
+            {
+                EmployeeId = request.EmployeeId,
+                LeaveTypeId = request.LeaveTypeId,
+                StartDate = request.StartDate,
+                EndDate = request.EndDate,
+                NumberOfDays = days,
+                Reason = request.Reason,
+                SupportingDocPath = request.SupportingDocPath,
+                Status = "Pending",
+                AppliedDate = DateTime.Now
+            };
+
+
+            _context.LeaveApplications.Add(leave);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Message = "Leave applied successfully", LeaveId = leave.LeaveId });
         }
     }
 }
