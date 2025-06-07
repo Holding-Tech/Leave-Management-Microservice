@@ -7,6 +7,7 @@
         public int LeaveTypeId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public DateTime RecordDate { get; set; }
         public int NumberOfDays { get; set; }
         public string Reason { get; set; }
         public string Status { get; set; } = "Pending"; 
