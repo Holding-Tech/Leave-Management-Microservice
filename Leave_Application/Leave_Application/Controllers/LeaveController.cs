@@ -42,7 +42,18 @@ namespace Leave_Application.Controllers
             _context.LeaveApplications.Add(leave);
             await _context.SaveChangesAsync();
 
+            NotifyCommunicationSystem(leave.LeaveId, leave.EmployeeId);
+
             return Ok(new { Message = "Leave applied successfully", LeaveId = leave.LeaveId });
+        }
+
+
+
+        private void NotifyCommunicationSystem(int leaveId, int employeeId)
+        {
+            
+            Console.WriteLine($"[COMMUNICATION SYSTEM] Employee ID {employeeId} applied for Leave ID {leaveId}");
+            // _communicationService.SendLeaveNotification(leaveId, employeeId);
         }
     }
 }

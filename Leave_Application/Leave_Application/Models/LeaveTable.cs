@@ -1,7 +1,11 @@
-﻿namespace Leave_Application.Models
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
+namespace Leave_Application.Models
 {
     public class LeaveTable
     {
+        [Key]
         public int LeaveId { get; set; }
         public int EmployeeId { get; set; }
         public int LeaveTypeId { get; set; }
