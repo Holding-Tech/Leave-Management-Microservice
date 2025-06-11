@@ -1,5 +1,6 @@
 ﻿using Leave_Application.Data;
 using Leave_Application.Models;
+using Leave_Application.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -47,6 +48,36 @@ namespace Leave_Application.Controllers
             return Ok(new { Message = "Leave applied successfully", LeaveId = leave.LeaveId });
         }
 
+        [HttpPut("update-status")]
+        public async Task<IActionResult> UpdateLeaveStatus([FromBody] LeaveApprovalDto request)
+        {
+            var leave = await _context.LeaveApplications.FirstOrDefaultAsync(l => l.LeaveId == request.LeaveId);
+            if (leave == null)
+            {
+                return NotFound($"Leave with ID {request.LeaveId} not found.");
+            }
+
+            if (request.Status.Equals("Approved", StringComparison.OrdinalIgnoreCase))
+            {
+                leave.Status = "Approved";
+               
+                 leave.NumberOfDays = (leave.EndDate - leave.StartDate).Days + 1;
+            }
+            else if (request.Status.Equals("Declined", StringComparison.OrdinalIgnoreCase))
+            {
+                leave.Status = "Declined";
+                leave.ManagerComments = request.ManagerComment ?? "No reason provided";
+            }
+            else
+            {
+                return BadRequest("Status must be either 'Approved' or 'Declined'.");
+            }
+
+            _context.LeaveApplications.Update(leave);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Message = $"Leave status updated to {leave.Status}" });
+        }
 
 
         private void NotifyCommunicationSystem(int leaveId, int employeeId)
