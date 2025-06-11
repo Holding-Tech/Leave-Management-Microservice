@@ -2,14 +2,30 @@
   {
     "ContainingType": "Leave_Application.Controllers.LeaveController",
     "Method": "ApplyForLeave",
-    "RelativePath": "apply",
+    "RelativePath": "api/Leave/apply",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "Leave_Application.Models.ApplyLeaveDto",
+        "Type": "Leave_Application.DTO.ApplyLeaveDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Leave_Application.Controllers.LeaveController",
+    "Method": "UpdateLeaveStatus",
+    "RelativePath": "api/Leave/update-status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Leave_Application.DTO.LeaveApprovalDto",
         "IsRequired": true
       }
     ],
