@@ -41,6 +41,32 @@ namespace Leave_Application.Services
             return (true, "Leave applied successfully", leave.LeaveId);
         }
 
-       
+        public async Task<(bool Success, string Message)> UpdateLeaveStatusAsync(LeaveApprovalDto request)
+        {
+            var leave = await _context.LeaveApplications.FirstOrDefaultAsync(l => l.LeaveId == request.LeaveId);
+            if (leave == null)
+                return (false, $"Leave with ID {request.LeaveId} not found.");
+
+            if (request.Status.Equals("Approved", StringComparison.OrdinalIgnoreCase))
+            {
+                leave.Status = "Approved";
+                leave.NumberOfDays = (leave.EndDate - leave.StartDate).Days + 1;
+            }
+            else if (request.Status.Equals("Declined", StringComparison.OrdinalIgnoreCase))
+            {
+                leave.Status = "Declined";
+                leave.ManagerComments = request.ManagerComment ?? "No reason provided";
+            }
+            else
+            {
+                return (false, "Status must be either 'Approved' or 'Declined'.");
+            }
+
+            _context.LeaveApplications.Update(leave);
+            await _context.SaveChangesAsync();
+
+            return (true, $"Leave status updated to {leave.Status}");
+        }
+
     }
 }

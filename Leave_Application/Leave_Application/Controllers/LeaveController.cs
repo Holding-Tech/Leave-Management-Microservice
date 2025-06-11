@@ -29,6 +29,15 @@ namespace Leave_Application.Controllers
             return Ok(new { result.Message, LeaveId = result.LeaveId });
         }
 
-       
+        [HttpPut("update-status")]
+        public async Task<IActionResult> UpdateLeaveStatus([FromBody] LeaveApprovalDto request)
+        {
+            var result = await _leaveService.UpdateLeaveStatusAsync(request);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(new { result.Message });
+        }
     }
 }
