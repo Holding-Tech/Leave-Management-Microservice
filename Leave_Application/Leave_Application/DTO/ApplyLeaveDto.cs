@@ -1,4 +1,4 @@
-﻿namespace Leave_Application.Models
+﻿namespace Leave_Application.DTO
 {
     public class ApplyLeaveDto
     {
