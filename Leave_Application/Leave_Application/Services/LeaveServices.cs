@@ -68,5 +68,23 @@ namespace Leave_Application.Services
             return (true, $"Leave status updated to {leave.Status}");
         }
 
+        public async Task<List<LeaveStatusDto>> GetAllLeaveApplicationsAsync()
+        {
+            var leaves = await _context.LeaveApplications
+                .Select(l => new LeaveStatusDto
+                {
+                    LeaveId = l.LeaveId,
+                    EmployeeId = l.EmployeeId,
+                    Status = l.Status,
+                    DaysRemaining = l.Status == "Approved" && l.EndDate >= DateTime.Today
+                        ? (l.EndDate - DateTime.Today).Days + 1
+                        : 0
+                })
+                .ToListAsync();
+
+            return leaves;
+        }
+
+
     }
 }

@@ -4458,11 +4458,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\student\\Videos\\Leave-Management-Microservice\\Leave_Application\\Leave_Application\\Leave_Application.csproj",
+      "projectUniqueName": "C:\\Users\\student\\Pictures\\Leave-Management-Microservice\\Leave_Application\\Leave_Application\\Leave_Application.csproj",
       "projectName": "Leave_Application",
-      "projectPath": "C:\\Users\\student\\Videos\\Leave-Management-Microservice\\Leave_Application\\Leave_Application\\Leave_Application.csproj",
+      "projectPath": "C:\\Users\\student\\Pictures\\Leave-Management-Microservice\\Leave_Application\\Leave_Application\\Leave_Application.csproj",
       "packagesPath": "C:\\Users\\student\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\student\\Videos\\Leave-Management-Microservice\\Leave_Application\\Leave_Application\\obj\\",
+      "outputPath": "C:\\Users\\student\\Pictures\\Leave-Management-Microservice\\Leave_Application\\Leave_Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4539,8 +4539,16 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\student\\Pictures\\Leave-Management-Microservice\\Leave_Application\\Leave_Application\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
+    }
+  ]
 }
